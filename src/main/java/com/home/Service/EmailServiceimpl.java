@@ -16,28 +16,35 @@ import java.io.IOException;
 public class EmailServiceimpl implements EmailService {
 
     @Value("${spring.mail.username}")
-    private String fromEmail;
-    @Autowired
+    private String sender;
+
     private JavaMailSender javaMailSender;
+
+    public EmailServiceimpl(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
 
     @Override
     public String sendMail(MultipartFile[] file, String to, String[] cc, String subject, String body) {
         try {
-            MimeMessage mimeMessage =javaMailSender.createMimeMessage();
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
-            mimeMessageHelper.setFrom(fromEmail);
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setFrom(sender);
             mimeMessageHelper.setTo(to);
             mimeMessageHelper.setCc(cc);
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(body);
 
-             for(int i=0; i<file.length;i++){
-                mimeMessageHelper.addAttachment(file[i].getOriginalFilename(),
-                        new ByteArrayResource(file[i].getBytes()));
-            }
-            javaMailSender.send(mimeMessage);
+            for (int i = 0; i < file.length; i++) {
+                mimeMessageHelper.addAttachment(
+                        file[i].getOriginalFilename(), new ByteArrayResource(file[i].getBytes())
+                );
 
-            return "mail send";
+            }
+                javaMailSender.send(mimeMessage);
+                return "mail send";
+
+
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

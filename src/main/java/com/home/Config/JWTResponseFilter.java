@@ -47,7 +47,6 @@ public class JWTResponseFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-
         }
         filterChain.doFilter(request,response);
 
