@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         dto.setId(user.getId());
         dto.setName(user.getName());
         dto.setUsername(user.getUsername());
-        dto.setEmailId(user.getEmailId());
+        dto.setEmail(user.getEmail());
        dto.setPassword(user.getPassword());
        dto.setUserRole(user.getUserRole());
         return dto;
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         user.setId(userDto.getId());
         user.setName(userDto.getName());
         user.setUsername(userDto.getUsername());
-        user.setEmailId(userDto.getEmailId());
+        user.setEmail(userDto.getEmail());
         user.setUserRole(userDto.getUserRole());
         user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
 //        user.setPassword(BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt(5)));

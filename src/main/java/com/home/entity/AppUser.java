@@ -25,10 +25,13 @@ public class AppUser {
     @Column(name = "password", nullable = false, unique = true, length = 250)
     private String password;
 
-    @Column(name = "email_id", nullable = false, unique = true)
-    private String emailId;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
     @JsonIgnore
     @Column(name = "user_Role", nullable = false, length = 25)
     private String userRole;
+
+    @OneToOne(mappedBy = "appUser")
+    private ForgotPassword forgotPassword;
 }

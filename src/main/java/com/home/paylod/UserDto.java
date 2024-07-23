@@ -13,7 +13,7 @@ public class UserDto {
     private String name;
     private String username;
     @Email
-    private String emailId;
+    private String email;
     private String password;
     private String userRole;
 }

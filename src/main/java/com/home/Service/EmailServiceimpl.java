@@ -51,5 +51,5 @@ public class EmailServiceimpl implements EmailService {
             throw new RuntimeException(e);
         }
     }
-    
+
 }
